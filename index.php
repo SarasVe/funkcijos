@@ -5,30 +5,34 @@ require_once __DIR__ . '/vendor/autoload.php';
 use OhMyBrew\BasicShopifyAPI;
 use Arubacao\TldChecker\Validator;
 
-ini_set('display_errors', 'On');
-error_reporting(-1);
+//ini_set('display_errors', 'On');
+//error_reporting(-1);
 
 class Order
 {
+
 	/*
 	 * Settings
 	 */
-	$domain = 'sarotestas.myshopify.com';
-	$apiKey = '66037abc84c74449d27728102f16be37';
-	$secret = '29d74413a5e4dbffd586e63a7e97f850';
+	private $domain = 'sarotestas.myshopify.com';
+	private $apiKey = '66037abc84c74449d27728102f16be37';
+	private $secret = '29d74413a5e4dbffd586e63a7e97f850';
 
-	$api = new BasicShopifyAPI(true); //  true sets it to private
+	protected $api = new BasicShopifyAPI(true); //  true sets it to private
+
+	public function __construct(){}
+
 	$api->setShop($domain);
 	$api->setApiKey($apiKey);
 	$api->setApiPassword($secret);
 
 	// existing order id's: 947864436821, 949967028309, 950614589525, 950633332821, 950708600917, 950709715029, 950714499157
-	$order_ID = 950614753365;
-	$new_order_id = 949725298771;
-	$itemId = 2131838795861;
-	$lineItem_ID = 321312;
-	$variant_ID = 238974;
-	$note = 'Gateway: PayPal';
+	protected $order_ID = 950614753365;
+	protected $new_order_id = 949725298771;
+	protected $itemId = 2131838795861;
+	protected $lineItem_ID = 321312;
+	protected $variant_ID = 238974;
+	protected $note = 'Gateway: PayPal';
 
 	// new order array
 	$newOrder = array(
@@ -262,30 +266,4 @@ class Order
 			echo "<br>[DELETE ORDER] $orderId was successfull.<br>";
 		}
 	}
-} // --- end of class Order
-
-// Now run your requests...
-//$api->rest(string $type, string $path, array $params = null);
-/*
-$result = $api->graph('{ shop { name } }'); // rest('GET', '/admin/shop.json');
-
-try {
-	echo $result->body->shop->name; // country;
-	// catch nerodo klaidos
-} catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
-*/
-/*****
-$call = $api->rest('GET', '/admin/products/count.json');
-if ($call->errors) {
-  echo "Oops! {$call->errors->status} error <br>";
-  print_r($call->errors->body);
-
-  // Original exception can be accessed via `$call->errors->exception`
-  // Example, if response body was `{"error": "Not found"}`...
-  /// then: `$call->errors->body->error` would return "Not Found"
-}
-echo nl2br("Number of products in shop: {$call->body->count}.\n");
-var_dump($call);
-******/

@@ -4,67 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f8a182ac9b95282e95a231da1e1ff14",
+    "content-hash": "8550e7f102f917674f059882b9688b71",
     "packages": [
-        {
-            "name": "arubacao/tld-checker",
-            "version": "1.2.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/arubacao/tld-checker.git",
-                "reference": "be2093388cf821e854b01ce5a895221b5baeca09"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/arubacao/tld-checker/zipball/be2093388cf821e854b01ce5a895221b5baeca09",
-                "reference": "be2093388cf821e854b01ce5a895221b5baeca09",
-                "shasum": ""
-            },
-            "require": {
-                "ext-intl": "*",
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "~3.0",
-                "phpunit/phpunit": "~4.8.36 || >=5.7.21"
-            },
-            "suggest": {
-                "illuminate/validation": "Required for Laravel validation"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Arubacao\\TldChecker\\TldCheckerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Arubacao\\TldChecker\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Christopher Lass",
-                    "homepage": "https://c-lass.com/"
-                }
-            ],
-            "description": "Top Level Domain (TLD) validation library for PHP",
-            "homepage": "https://github.com/arubacao/tld-checker",
-            "keywords": [
-                "domain",
-                "email",
-                "tld",
-                "tld-checker",
-                "validation"
-            ],
-            "time": "2019-02-28T15:13:49+00:00"
-        },
         {
             "name": "firebase/php-jwt",
             "version": "v5.0.0",
@@ -841,6 +782,65 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "arubacao/tld-checker",
+            "version": "1.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arubacao/tld-checker.git",
+                "reference": "be2093388cf821e854b01ce5a895221b5baeca09"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arubacao/tld-checker/zipball/be2093388cf821e854b01ce5a895221b5baeca09",
+                "reference": "be2093388cf821e854b01ce5a895221b5baeca09",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~4.8.36 || >=5.7.21"
+            },
+            "suggest": {
+                "illuminate/validation": "Required for Laravel validation"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Arubacao\\TldChecker\\TldCheckerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Arubacao\\TldChecker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christopher Lass",
+                    "homepage": "https://c-lass.com/"
+                }
+            ],
+            "description": "Top Level Domain (TLD) validation library for PHP",
+            "homepage": "https://github.com/arubacao/tld-checker",
+            "keywords": [
+                "domain",
+                "email",
+                "tld",
+                "tld-checker",
+                "validation"
+            ],
+            "time": "2019-02-28T15:13:49+00:00"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.1.0",
