@@ -3,70 +3,78 @@ namespace tests;
 
 include('./src/index.php');
 
+use src\Order;
 use PHPUnit\Framework\TestCase;
 
 class OrderTest extends TestCase
 {
-    var $abc;
+    var $test;
 
-    function OrderTest($abc)
+    function OrderTest( $test )
     {
-        $this->testCheckString($abc);
+        $this->testCheckString( $test );
     }
 
     function setUp(): void
     {
-        // create a new instance of String with the
-        // string 'abc'
-        $this->abc = new Order();
+        $this->test = new Order(); // create a new instance of String with the string 'test'
     }
     function tearDown(): void
     {
-        // delete your instance
-        unset($this->abc);
+        unset( $this->test ); // delete your instance
     }
 
     /**
      * @dataProvider infoProvider
      */
-    public function testCheckString($d)
+    public function testCheckString( $d )
     {
-        $check = new Order();
-        $this->assertTrue($d);
+        $check = new Order;
+        $this->assertTrue( true == $check->checkString( $d ) );
     }
 
-
-    public function infoProvider($data)
+    public function infoProvider( $d )
     {
-        global $data, $d;
-        $data = json_decode(json_encode($data),true);
-        $d = $data;
+        //global $data, $d;
+        //$data = json_decode( json_encode( $data ) );
 
-        foreach($d as $k => $v){
+        /*if( is_array( $data ) ) {
+            $data = $this->arrayToObject( $data );
+        }*/
+        //$d = $data;
 
-            if(is_array($v)){
+        //echo '<pre>'; var_dump( $d ); echo '</pre>';
+        foreach( $d as $k => $v ) {
 
-                foreach($v as $k1 => $v1){
+            $d->$k = "";
+            $this->testCheckString( $d );
+            $d->$k = $v;
 
-                    $d[$k][$k1] = null;
-                    OrderTest::testCheckString($d);
-                    $d = $data;
+            if( is_object( $v ) ) {
 
-                    if(is_array($v1)){
+                $this->infoProvider( $v );
+                /*foreach( $v as $k1 => $v1 ) {
 
-                        foreach($v1 as $k2 => $v2){
+                    $d->$k->$k1 = "";
+                    $this->testCheckString( $d );
+                    $d->$k->$k1 = $v1;
 
-                            $d[$k][$k1][$k2] = null;
-                            OrderTest::testCheckString($d);
-                            $d = $data;
+                    if( is_object( $v1 ) ) {
+
+                        foreach( $v1 as $k2 => $v2 ) {
+
+                            $d->$k->$k1->$k2 = "";
+                            $this->testCheckString( $d );
+                            $d->$k->$k1->$k2 = $v2;
                         }
                     }
-                }
+                }*/
             }
         }
     }
 }
-$data = array(
+// sample order data
+/*$data = array(
     'order' => array(
         'name' => 'vardenis',
         'email' => 'vards@mail.com',
@@ -87,10 +95,73 @@ $data = array(
             'country' => 'France'
         )
     )
-);
+);*/
+
+// Simo ARRAY
+$data = array (
+	  'order' =>
+	  array (
+	    'line_items' => 'tusas',
+	    'customer' =>
+	    array (
+	      'first_name' => 'vardas',
+	      'last_name' => 'pavardas',
+	      'email' => 'info@mail.com',
+	    ),
+	    'billing_address' =>
+	    array (
+	      'first_name' => 'vardas',
+	      'last_name' => 'pavardas',
+	      'address1' => '12 bezdodnys',
+				'address2' => '16 vilnius',
+	      'phone' => 87612876,
+	      'city' => 'kaunas',
+	      'province' => 'kauno',
+	      'country' => 'lietuva',
+	      'zip' => 23423,
+	    ),
+	    'shipping_address' =>
+	    array (
+	      'first_name' => 'vardas',
+	      'last_name' => 'pavardas',
+	      'address1' => '12 bezdonys',
+				'address2' => '16 vilnius',
+	      'phone' => 87612876,
+	      'city' => 'kaunas',
+	      'province' => 'kauno',
+	      'country' => 'lietuva',
+	      'zip' => 124312,
+	    ),
+	    'email' => 'info@mail.com',
+			'shipping_lines' =>
+			array(
+			0 =>
+				array(
+					'price' => 23.99,
+					'title' => 'akiu tusas'
+				)
+			),
+	    'transactions' =>
+	    	array (
+					0 =>
+						array (
+					        'kind' => 'sale',
+					        'status' => 'success',
+					        'amount' => 50.00,
+					        'gateway' => 'gateway: PayPal'
+							),
+						),
+	    'financial_status' => 'paid',
+	    'currency' => 'US baksai',
+			'send_receipt' => false,
+			'suppress_notifications' => true,
+			'test' => 'testas'
+	  ),
+	);
 //$testas = new OrderTest($data);
 //$result = PHPUnit::run($testas);
-//$test = OrderTest::testCheckString($data);
-//$t = true;
-$test = OrderTest::infoProvider($data);
+//$test = OrderTest::testCheckString();
+$data = json_decode( json_encode( $data ) );
+$test = new OrderTest;
+$test->infoProvider( $data );
 //echo $test->testCheckString();
