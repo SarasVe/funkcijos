@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class OrderTest extends TestCase
 {
-    var $test;
+/*    var $test;
 
     function OrderTest( $test )
     {
@@ -19,7 +19,7 @@ class OrderTest extends TestCase
     {
         $this->test = new Order(); // create a new instance of String with the string 'test'
     }
-
+*/
 
     /**
      * @dataProvider infoProvider
@@ -71,11 +71,11 @@ class OrderTest extends TestCase
         if( $return == false ) echo '\r\n FALSE \r\n';
         if( $return == true ) echo '\r\n TRUE \r\n';
     }
-
+/*
     function tearDown(): void
     {
         unset( $this->test ); // delete your instance
-    }
+    }*/
 }
 // sample order data
 $data = array(
