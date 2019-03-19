@@ -179,7 +179,7 @@ class Order
 	function checkString( $info )
 	{
 		//error_log( print_r( $info, true ) );
-		$info = json_decode( json_encode( $info ) );
+		//$info = json_decode( json_encode( $info ) );
 		//$info = (object) $info;
 		//$info = $info->order;
 		//$ship = $info->order->shipping_address;
@@ -196,11 +196,10 @@ class Order
 					echo '\r\n Email is Valid\r\n';
 					$e = $info->email;
 					return $e;
-				} else {
-					//error_log( print_r( $info, true ) );
-					$e = $this->emptyFields( $info );
-					return $e; //true;
 				}
+			} else {
+				$e = $this->emptyFields( $info );error_log( print_r( $e, true ) );
+				return $e;//true;
 			}
 	}
 	/*
@@ -208,21 +207,21 @@ class Order
 	 */
 	function emptyFields( $d )
 	{
-		//$count = 0;
+		$count = 0;
 		$empty = array();
 
-			foreach( $d as $k => $v ) {
+		foreach( $d as $k => $v ) {
 
-				if( is_object( $v ) ) $this->emptyFields( $v );
+			if( is_object( $v ) ) $this->emptyFields( $v );
 
-				elseif( empty( $v ) ) {
-						//print_r($k);
-						$empty[$count] = $k;
-						$count++;
-						return $k;
-        }
+			elseif( empty( $v ) ) {
+					//print_r($k);
+					$empty[$count] = $k;
+					$count++;
+					return $k;
+        	}
     	}
-			return $empty;
+		return $empty;
 	}
 
 	/*
@@ -291,24 +290,4 @@ class Order
 			echo "<br>[DELETE ORDER] $orderId was successfull.<br>";
 		}
 	}
-
-	/*
-	 * check email owner is a user and membership
-	 */
-	 function checkMembership( $email )
-	 {
-		 $tag = "membership";
-		 $api = getApi();
-		 $customer = $api->rest( 'GET', '/admin/customers/search.json?query='.$email.'&fields=email,id,tags' );
-
-		 if( strpos( $customer->tag, $tag ) !== false ) {
-
-			return true;
-
-		} else {
-
-			return false;
-		}
-	 }
-
 }

@@ -25,10 +25,10 @@ class CustomerTest extends TestCase
 
     public function testCheckMembership( )
     {
-        $mail = 'vards@mail.com';
+        $mail = 'vards@mail.com'; //'xxx'; //
         //echo "emailas: $mail";
         $return = $this->test->checkMembership( $mail );
-        print_r($return);
+        //print_r($return);
         //if( $return == false ) echo '\r\n FALSE \r\n';
         //if( $return == true ) echo '\r\n TRUE \r\n';
         $this->assertTrue($return);

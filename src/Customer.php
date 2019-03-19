@@ -10,7 +10,7 @@ error_reporting(-1);
 class Customer extends Order
 {
     public function __construct(){
-		$this->checkMembership( 'vards@mail.com' );
+		// $this->checkMembership( 'vards@mail.com' );
 	}
 
     /*
@@ -21,20 +21,29 @@ class Customer extends Order
         $tag = "membership";
         $api = Order::getApi();
         $query = array('query' => 'email:'. $email .'', 'fields' => 'tags, id' );
-        $customer = $api->rest('GET', '/admin/customers/search.json', $query);
 
-        $tags = reset($customer->body->customers)->tags; //print_r($tags);
-        //$customer = json_decode( json_encode( $customer ), true );
-        //print_r( reset($customer->body->customers)->tags );
-        //print_r($customer);
+        try {
+            $customer = $api->rest( 'GET', '/admin/customers/search.json', $query );
+            // check API errors
+            if ( $customer->errors ) {
 
-        if( strpos( $tags, $tag ) !== false ) {
+                echo "Oops! {$customer->errors->status} error";
+                print_r( $customer->errors->body );
+            }
+            $tags = reset( $customer->body->customers )->tags;
 
-            return true;
+            if( strpos( $tags, $tag ) !== false ) {
 
-       } else {
+                return true;
 
-           return false;
-       }
+            } else {
+
+               return false;
+            }
+
+        } catch (\Exception $e) {
+            //print_r( $e );
+            return false;
+        }
     }
 }

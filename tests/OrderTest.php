@@ -26,10 +26,10 @@ class OrderTest extends TestCase
      */
     public function testCheckString( $d, $e )
     {
-        $check = new Order;
+        $check = new Order; //var_dump( $d );
         $ats = $check->checkString( $d ); //error_log( print_r( $ats, true ) );
-        echo '$ats = ';var_dump($ats.'. '); echo '$e = ';var_dump($e.'. ');
-        if( empty( $ats ) ) print_r(' Negryzo ats is checkString. ');
+        //echo '$ats = ';var_dump($ats.'. '); echo '$e = ';var_dump($e.'. ');
+        if( empty( $ats ) ) print_r(' Negryzo $ats is checkString. ');
         else {
           if( $ats == 'ok' ) $e = 'ok';
           $this->assertEquals( $e, $ats );
@@ -38,39 +38,36 @@ class OrderTest extends TestCase
 
     public function infoProvider( $d )
     {
-        //echo ' IKI FOREACH. '; print_r($d);
-        $d = $d->order;
-
+        //echo ' IKI FOREACH. ';
+        print_r($d);
+        if( $d->order ) $d = $d->order;
+        //var_dump( $d );
         foreach( $d as $k => $v ) {
 
-          //if( $k == 'order' ) $d = $d->order;
-          //else {
-            if( is_object( $k ) ) {
+            //if( $k == 'order' ) $d = $d->order;
+            //else {
+                if( is_object( $v ) ) {
 
-                $this->infoProvider( $k );
-            }
-            if( $k == 'email' ) {
+                    $this->infoProvider( $k );
+                }
+                if( $k == 'email' ) {
 
-              $d->$k = '123';
-              $e = $k;
-              $this->testCheckString( $d, $e );
-            } else {
-            $e = $k; //echo ' $k yra: '.$e.'. ';
-            $d->$k = "";
-            //echo ' VIDUJE FOREACH. '; print_r($d);
-            $this->testCheckString( $d, $e );
-            $d->$k = $v;
-            }
+                  $d->$k = '123';
+                  $e = $k; print_r( '\r\n Testuoju email. \r\n' );
+                  $this->testCheckString( $d, $e );
+
+                } else {
+
+                $e = $k; //echo ' $k yra: '.$e.'. ';
+                $d->$k = "";
+                echo ' VIDUJE FOREACH. '; print_r($d->$k);
+                $this->testCheckString( $d, $e );
+                $d->$k = $v;
+                }
+            //}
        }
     }
-    public function testCheckMembership( $mail )
-    {
-        echo "emailas: $mail";
-        $return = $this->test->checkMembership( $mail );
-        print_r($return);
-        if( $return == false ) echo '\r\n FALSE \r\n';
-        if( $return == true ) echo '\r\n TRUE \r\n';
-    }
+
 /*
     function tearDown(): void
     {
